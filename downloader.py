@@ -1,5 +1,6 @@
 from pytube import YouTube
 import os
+import os.path
 import subprocess
 
 
@@ -19,14 +20,21 @@ class Downloader:
         video = yt.get('mp4', resolution)
         video_filename = self.filename[0:self.filename.rfind('/')] + '/temp.mp4'
         print(video_filename)
+        if os.path.exists(video_filename):
+            os.remove(video_filename)
+
         video.download(video_filename)
 
         if file_type == Downloader.VIDEO_ONLY:
             return
         elif file_type == Downloader.AUDIO_AND_VIDEO:
+            if os.path.exists(self.filename):
+                os.remove(self.filename)
             command = "ffmpeg -i " + video_filename + " -ab 160k -ac 2 -ar 44100 -vn " + self.filename
             subprocess.call(command, shell=True)
         else:
+            if os.path.exists(self.filename):
+                os.remove(self.filename)
             command = "ffmpeg -i " + video_filename + " -ab 160k -ac 2 -ar 44100 -vn " + self.filename
             subprocess.call(command, shell=True)
             os.remove(video_filename)
@@ -37,10 +45,16 @@ class Downloader:
 # video = yt.get('mp4', str(yt.filter('mp4')[0]).split(" ")[4])
 # video.download('C:/Users/ZhangY/Desktop/audio.mp4')
 
-url = "https://www.youtube.com/watch?v=Y9ovl3ixqHs"
-video_path = "C:/Users/ZhangY/Desktop/temp.mp4"
-audio_path = "C:/Users/ZhangY/Desktop/audio.mp3"
-clip_path = "C:/Users/ZhangY/Desktop/clip.mp4"
 
-# downloader = Downloader(url, audio_path)
-# downloader.download(AudioDownloader.AUDIO_AND_VIDEO)
+
+url = "https://www.youtube.com/watch?v=Y9ovl3ixqHs"
+# video_path = "C:/Users/ZhangY/Desktop/blend/temp.mp4"
+audio_path = "C:/Users/ZhangY/Desktop/blend/audio.mp3"
+# clip_path = "C:/Users/ZhangY/Desktop/blend/clip.mp4"
+#
+downloader = Downloader(url, audio_path)
+downloader.download(Downloader.AUDIO_ONLY)
+
+
+# command = "ftp 172.20.80.58"
+# subprocess.call(command,  shell=True)
