@@ -39,22 +39,8 @@ class Downloader:
             subprocess.call(command, shell=True)
             os.remove(video_filename)
 
-
-# yt = YouTube("https://www.youtube.com/watch?v=Y9ovl3ixqHs")
-# print(str(yt.filter('mp4')[0]).split(" ")[4])
-# video = yt.get('mp4', str(yt.filter('mp4')[0]).split(" ")[4])
-# video.download('C:/Users/ZhangY/Desktop/audio.mp4')
-
-
-
-url = "https://www.youtube.com/watch?v=Y9ovl3ixqHs"
-# video_path = "C:/Users/ZhangY/Desktop/blend/temp.mp4"
+video_url = "https://www.youtube.com/watch?v=KUFgjTuvAvs"
 audio_path = "C:/Users/ZhangY/Desktop/blend/audio.mp3"
-# clip_path = "C:/Users/ZhangY/Desktop/blend/clip.mp4"
-#
-downloader = Downloader(url, audio_path)
+
+downloader = Downloader(video_url, audio_path)
 downloader.download(Downloader.AUDIO_ONLY)
-
-
-# command = "ftp 172.20.80.58"
-# subprocess.call(command,  shell=True)
