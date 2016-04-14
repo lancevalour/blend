@@ -15,10 +15,11 @@ class Downloader:
 
     def download(self, file_type):
         yt = YouTube(self.url)
+        print(str(yt.title).replace(" ", ""))
         resolution = str(yt.filter('mp4')[0]).split(" ")[4]
         print(resolution)
         video = yt.get('mp4', resolution)
-        video_filename = self.filename[0:self.filename.rfind('/')] + '/temp.mp4'
+        video_filename = self.filename[0:self.filename.rfind('/')] + '/' + str(yt.title).replace(" ", "") + '.mp4'
         print(video_filename)
         if os.path.exists(video_filename):
             os.remove(video_filename)
@@ -39,8 +40,8 @@ class Downloader:
             subprocess.call(command, shell=True)
             os.remove(video_filename)
 
-video_url = "https://www.youtube.com/watch?v=KUFgjTuvAvs"
-audio_path = "C:/Users/ZhangY/Desktop/blend/audio.mp3"
-
-downloader = Downloader(video_url, audio_path)
-downloader.download(Downloader.AUDIO_ONLY)
+# video_url = "https://www.youtube.com/watch?v=mOKqNxN4jWM"
+# audio_path = "C:/Users/ZhangY/Desktop/blend/audio.mp3"
+#
+# downloader = Downloader(video_url, audio_path)
+# downloader.download(Downloader.AUDIO_ONLY)

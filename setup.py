@@ -7,5 +7,5 @@ setup(
     include_package_data=True,
     license='MIT',
     author='Yicheng Zhang',
-    url='https://github.com/lancevalour/blend'
+    url='https://github.com/lancevalour/blend', requires=['matplotlib', 'librosa', 'pytube']
 )
